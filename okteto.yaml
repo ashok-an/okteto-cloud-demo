@@ -1,0 +1,13 @@
+build:
+  api:
+    context: .
+deploy:
+  - kubectl run test-pod --image=${OKTETO_BUILD_API_IMAGE} --restart=Never
+dev:
+  api:
+    command: ["bash"]
+    forward:
+      - 8080:8080
+      - 9229:9229
+    sync:
+      - .:/src
